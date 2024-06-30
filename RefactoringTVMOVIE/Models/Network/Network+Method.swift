@@ -13,6 +13,8 @@ extension Network {
         switch self {
         case .getTVList:
             return .get
+        case .getMovieList:
+            return .get
         }
     }
 }

@@ -16,6 +16,15 @@ extension Network {
         } else {
             return "/search/tv"
         }
+    case .getMovieList(let request):
+        switch request.movieReqeustType {
+        case .nowPlaying:
+            return "/movie/now_playing"
+        case .popular:
+            return "/movie/popular"
+        case .upcoming:
+            return "/movie/upcoming"
+        }
     }
   }
 }

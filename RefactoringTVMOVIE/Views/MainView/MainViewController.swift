@@ -17,6 +17,7 @@ final class MainViewController: UIViewController {
     private let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
     private let tvTrigger = BehaviorSubject<Int>(value: 1)
+    private let movieTrigger = PublishSubject<Void>()
     
     // MARK: - Layouts
     // 상단 뷰
@@ -46,6 +47,7 @@ final class MainViewController: UIViewController {
 
         setUI()
         bindViewModel()
+        bindView()
     }
     
     // MARK: - Functions
@@ -81,7 +83,7 @@ final class MainViewController: UIViewController {
             return keyword
         })
         
-        let input = MainViewModel.Input(tvTrigger: tvTrigger, search: keyword)
+        let input = MainViewModel.Input(tvTrigger: tvTrigger, movieTrigger: movieTrigger, search: keyword)
         
         let output = viewModel.transform(input: input)
         
@@ -95,6 +97,41 @@ final class MainViewController: UIViewController {
                 snapshot.appendItems(items, toSection: section)
                 self?.collectionView.applySnapShot(snapShot: snapshot)
             }).disposed(by: disposeBag)
+        
+        output.movieResult
+            .asDriver(onErrorJustReturn: MovieResult(upcoming: MovieListModel(page: 1, results: [Movie]()), popular: MovieListModel(page: 1, results: [Movie]()), nowPlaying: MovieListModel(page: 1, results: [Movie]())))
+            .drive(onNext: { [weak self] movieResult in
+                var snapshot = NSDiffableDataSourceSnapshot<Section,Item>()
+                let bigImageList = movieResult.nowPlaying.results.map { Item.bigImage($0)}
+                
+                let bannerSection = Section.banner
+                snapshot.appendSections([bannerSection])
+                snapshot.appendItems(bigImageList, toSection: bannerSection)
+                
+                let horizontalSection = Section.horizontal("Popular Movies")
+                let normalList = movieResult.popular.results.map { Item.normalMovie( $0 )}
+                snapshot.appendSections([horizontalSection])
+                snapshot.appendItems(normalList, toSection: horizontalSection)
+                
+                let verticalSection = Section.vertical("Upcoming Movies")
+                let itemList = movieResult.upcoming.results.map { Item.list($0)}
+                snapshot.appendSections([verticalSection])
+                snapshot.appendItems(itemList, toSection: verticalSection)
+                
+                self?.collectionView.applySnapShot(snapShot: snapshot)
+            }).disposed(by: disposeBag)
+    }
+    
+    private func bindView() {
+        buttonView.tvButton.rx.tap.bind { [weak self] in
+            self?.textField.isHidden = false
+            self?.tvTrigger.onNext(1)
+        }.disposed(by: disposeBag)
+        
+        buttonView.movieButton.rx.tap.bind { [weak self] in
+            self?.textField.isHidden = true
+            self?.movieTrigger.onNext(Void())
+        }.disposed(by: disposeBag)
     }
 }
 

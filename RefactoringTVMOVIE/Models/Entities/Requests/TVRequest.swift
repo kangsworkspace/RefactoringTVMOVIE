@@ -18,8 +18,3 @@ struct TVRequest: Decodable {
         self.query = query
     }
 }
- 
-enum LanguageType: String, Decodable {
-    case korean = "ko"
-    case english = "en"
-}

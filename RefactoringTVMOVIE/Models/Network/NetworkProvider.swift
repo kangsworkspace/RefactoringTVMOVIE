@@ -16,9 +16,7 @@ final class NetworkProvider {
     static let shared = NetworkProvider()
     private let provider = MoyaProvider<Network>()
     
-    
     private init() {}
-    
     
     // MARK: - Functions
     func fetchTV(tvRequest: TVRequest) -> Single<TVListModel> {
@@ -26,6 +24,40 @@ final class NetworkProvider {
             .map { response in
                 let decoder = JSONDecoder()
                 return try decoder.decode(TVListModel.self, from: response.data)
+            }
+    }
+    
+    func fetchMovie() -> Single<MovieResult> {
+        let upcoming = fetchMovieUpcoming()
+        let popular = fetchMoviePopular()
+        let nowPlaying = fetchMovieNowPlaying()
+           
+        return Single.zip(upcoming, popular, nowPlaying) { upcoming, popular, nowPlaying in
+            return MovieResult(upcoming: upcoming, popular: popular, nowPlaying: nowPlaying)
+        }
+    }
+
+    private func fetchMovieUpcoming() -> Single<MovieListModel> {
+        return provider.rx.request(.getMovieList(MovieRequest(movieReqeustType: .upcoming)))
+            .map { response in
+                let decoder = JSONDecoder()
+                return try decoder.decode(MovieListModel.self, from: response.data)
+            }
+    }
+    
+    private func fetchMoviePopular() -> Single<MovieListModel> {
+        return provider.rx.request(.getMovieList(MovieRequest(movieReqeustType: .popular)))
+            .map { response in
+                let decoder = JSONDecoder()
+                return try decoder.decode(MovieListModel.self, from: response.data)
+            }
+    }
+    
+    private func fetchMovieNowPlaying() -> Single<MovieListModel> {
+        return provider.rx.request(.getMovieList(MovieRequest(movieReqeustType: .nowPlaying)))
+            .map { response in
+                let decoder = JSONDecoder()
+                return try decoder.decode(MovieListModel.self, from: response.data)
             }
     }
 }

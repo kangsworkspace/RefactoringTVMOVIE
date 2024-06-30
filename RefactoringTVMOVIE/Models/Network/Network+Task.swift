@@ -32,6 +32,14 @@ extension Network {
             }
             
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+            
+        case .getMovieList(let request):
+            let parameters: [String: Any] = [
+                "api_key": apiKey,
+                "language": request.language.rawValue,
+            ]
+
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
     }
 }

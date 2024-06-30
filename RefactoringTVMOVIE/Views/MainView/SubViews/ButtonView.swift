@@ -12,13 +12,13 @@ import Then
 
 final class ButtonView: UIView {
     // MARK: - Layouts
-    private let tvButton = UIButton().then {
+    let tvButton = UIButton().then {
         $0.setTitle("TV", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.configuration = UIButton.Configuration.bordered()
     }
     
-    private let movieButton = UIButton().then {
+    let movieButton = UIButton().then {
         $0.setTitle("MOVIE", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.configuration = UIButton.Configuration.bordered()

@@ -19,6 +19,7 @@ final class CollectionView: UIView {
         $0.register(NormalCollectionViewCell.self, forCellWithReuseIdentifier: NormalCollectionViewCell.id)
         $0.register(BigImageCollectionViewCell.self, forCellWithReuseIdentifier: BigImageCollectionViewCell.id)
         $0.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.id)
+        $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.id)
     }
 
     // MARK: - Life Cycles
@@ -59,6 +60,21 @@ final class CollectionView: UIView {
                 return cell
             }
         })
+        
+        // 헤더 적용
+        dataSource?.supplementaryViewProvider = {[weak self] collectionView, kind, indexPath -> UICollectionReusableView in
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderView.id, for: indexPath)
+            let section = self?.dataSource?.sectionIdentifier(for: indexPath.section)
+            
+            switch section {
+            case .horizontal(let title), .vertical(let title):
+                (header as? HeaderView)?.configure(title: title)
+            default:
+                print("Defualt")
+            }
+            
+            return header
+        }
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
@@ -105,6 +121,10 @@ final class CollectionView: UIView {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        section.boundarySupplementaryItems = [header]
+        
         return section
     }
     
@@ -118,6 +138,10 @@ final class CollectionView: UIView {
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        section.boundarySupplementaryItems = [header]
         
         return section
     }

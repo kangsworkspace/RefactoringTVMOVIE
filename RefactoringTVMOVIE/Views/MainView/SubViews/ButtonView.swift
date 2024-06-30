@@ -10,15 +10,15 @@ import UIKit
 import SnapKit
 import Then
 
-class ButtonView: UIView {
+final class ButtonView: UIView {
     // MARK: - Layouts
-    let tvButton = UIButton().then {
+    private let tvButton = UIButton().then {
         $0.setTitle("TV", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.configuration = UIButton.Configuration.bordered()
     }
     
-    let movieButton = UIButton().then {
+    private let movieButton = UIButton().then {
         $0.setTitle("MOVIE", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.configuration = UIButton.Configuration.bordered()
@@ -29,8 +29,6 @@ class ButtonView: UIView {
         super.init(frame: frame)
         setUI()
     }
-    
-
     
     // MARK: - Funtions
     private func setUI() {

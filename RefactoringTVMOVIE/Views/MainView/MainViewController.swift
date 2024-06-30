@@ -12,7 +12,7 @@ import RxCocoa
 import SnapKit
 import Then
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     // MARK: - Fields
     private let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
@@ -38,6 +38,8 @@ class MainViewController: UIViewController {
         $0.leftViewMode = .always
     }
     
+    private let collectionView = CollectionView()
+    
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,7 @@ class MainViewController: UIViewController {
         self.view.addSubview(topStackView)
         topStackView.addArrangedSubview(textField)
         topStackView.addArrangedSubview(buttonView)
+        self.view.addSubview(collectionView)
         
         topStackView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(12)
@@ -64,6 +67,11 @@ class MainViewController: UIViewController {
         
         buttonView.snp.makeConstraints { make in
             make.height.equalTo(80)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(topStackView.snp.bottom)
         }
     }
     
@@ -79,8 +87,13 @@ class MainViewController: UIViewController {
         
         output.tvList
             .asDriver(onErrorJustReturn: [TV]())
-            .drive(onNext: { tvList in
-                print(tvList)
+            .drive(onNext: { [weak self] tvList in
+                var snapshot = NSDiffableDataSourceSnapshot<Section,Item>()
+                let items = tvList.map { Item.normal( $0 )}
+                let section = Section.double
+                snapshot.appendSections([section])
+                snapshot.appendItems(items, toSection: section)
+                self?.collectionView.applySnapShot(snapShot: snapshot)
             }).disposed(by: disposeBag)
     }
 }

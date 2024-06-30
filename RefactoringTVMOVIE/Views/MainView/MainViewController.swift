@@ -120,6 +120,22 @@ final class MainViewController: UIViewController {
                 
                 self?.collectionView.applySnapShot(snapShot: snapshot)
             }).disposed(by: disposeBag)
+        
+        collectionView.collectionView.rx.prefetchItems
+            .filter({[weak self] _ in
+                return self?.viewModel.currentContentType == .tv
+            })
+            .bind {[weak self] indexPath in
+                let snapshot = self?.collectionView.dataSource?.snapshot()
+                guard let lastIndexPath = indexPath.last,
+                      let section = self?.collectionView.dataSource?.sectionIdentifier(for: lastIndexPath.section),
+                      let itemCount = snapshot?.numberOfItems(inSection: section),
+                      let currentPage = try? self?.tvTrigger.value() else { return }
+                
+                if lastIndexPath.row > itemCount - 4 {
+                    self?.tvTrigger.onNext(currentPage + 1)
+                }
+            }.disposed(by: disposeBag)
     }
     
     private func bindView() {

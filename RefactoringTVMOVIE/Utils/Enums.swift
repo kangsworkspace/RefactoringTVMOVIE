@@ -31,3 +31,8 @@ enum MovieRequestType: Decodable {
     case popular
     case nowPlaying
 }
+
+enum ContentType: String, Decodable {
+    case tv
+    case movie
+}

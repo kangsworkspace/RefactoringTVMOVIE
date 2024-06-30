@@ -39,6 +39,7 @@
 		3BB81EFA2C3171AC00577F62 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB81EF92C3171AC00577F62 /* Enums.swift */; };
 		3BB81EFC2C31876C00577F62 /* BigImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB81EFB2C31876C00577F62 /* BigImageCollectionViewCell.swift */; };
 		3BB81EFE2C31877900577F62 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB81EFD2C31877900577F62 /* ListCollectionViewCell.swift */; };
+		3BB81F002C318BA400577F62 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB81EFF2C318BA400577F62 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		3BB81EF92C3171AC00577F62 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		3BB81EFB2C31876C00577F62 /* BigImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BB81EFD2C31877900577F62 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
+		3BB81EFF2C318BA400577F62 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 		3BB81EEE2C31653200577F62 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3BB81EFF2C318BA400577F62 /* HeaderView.swift */,
 				3BB81EEF2C31655300577F62 /* NormalCollectionViewCell.swift */,
 				3BB81EFB2C31876C00577F62 /* BigImageCollectionViewCell.swift */,
 				3BB81EFD2C31877900577F62 /* ListCollectionViewCell.swift */,
@@ -343,6 +346,7 @@
 				3BB81ED62C313B9900577F62 /* Network+Method.swift in Sources */,
 				3BB81EDA2C313C1300577F62 /* Network+Task.swift in Sources */,
 				3BB81ED42C313B5F00577F62 /* Network+BaseURL.swift in Sources */,
+				3BB81F002C318BA400577F62 /* HeaderView.swift in Sources */,
 				3BB81EB82C31383200577F62 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

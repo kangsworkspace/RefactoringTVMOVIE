@@ -11,7 +11,7 @@ import SnapKit
 import Kingfisher
 import Then
 
-class NormalCollectionViewCell: UICollectionViewCell {
+final class NormalCollectionViewCell: UICollectionViewCell {
     // MARK: - Fields
     static let id = "NormalCollectionViewCell"
     

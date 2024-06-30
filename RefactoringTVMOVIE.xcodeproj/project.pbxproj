@@ -31,6 +31,7 @@
 		3BB81EE12C3143FE00577F62 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB81EE02C3143FE00577F62 /* MainViewModel.swift */; };
 		3BB81EE32C31441F00577F62 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB81EE22C31441F00577F62 /* Protocols.swift */; };
 		3BB81EE62C3146E000577F62 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB81EE52C3146E000577F62 /* Then */; };
+		3BB81EEA2C3161A400577F62 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB81EE92C3161A400577F62 /* ButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		3BB81EDE2C313D2E00577F62 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		3BB81EE02C3143FE00577F62 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		3BB81EE22C31441F00577F62 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		3BB81EE92C3161A400577F62 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				3BB81E9F2C31373B00577F62 /* MainViewController.swift */,
+				3BB81EEB2C3161C300577F62 /* SubViews */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -193,6 +196,14 @@
 				3BB81EDC2C313CD800577F62 /* TVRequest.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		3BB81EEB2C3161C300577F62 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				3BB81EE92C3161A400577F62 /* ButtonView.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +295,7 @@
 			files = (
 				3BB81EA02C31373B00577F62 /* MainViewController.swift in Sources */,
 				3BB81E9C2C31373B00577F62 /* AppDelegate.swift in Sources */,
+				3BB81EEA2C3161A400577F62 /* ButtonView.swift in Sources */,
 				3BB81EDD2C313CD800577F62 /* TVRequest.swift in Sources */,
 				3BB81ED82C313BED00577F62 /* Network+Path.swift in Sources */,
 				3BB81ED22C313B0000577F62 /* Network.swift in Sources */,

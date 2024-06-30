@@ -12,10 +12,10 @@ import Then
 
 final class CollectionView: UIView {
     // MARK: - Fields
-    private var dataSource: UICollectionViewDiffableDataSource<Section,Item>?
+    var dataSource: UICollectionViewDiffableDataSource<Section,Item>?
     
     // MARK: - Layouts
-    lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
         $0.register(NormalCollectionViewCell.self, forCellWithReuseIdentifier: NormalCollectionViewCell.id)
         $0.register(BigImageCollectionViewCell.self, forCellWithReuseIdentifier: BigImageCollectionViewCell.id)
         $0.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.id)

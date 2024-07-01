@@ -132,7 +132,8 @@ git clone https://github.com/kangsworkspace/RefactoringTVMOVIE
 | <img src="./img/TV.gif" width="80%"/> | <img src="./img/Review.gif" width="80%"/> | <img src="./img/Search.gif" width="80%"/> |
 |--|--|--|
 
- - <b> Modern Collection View 적용을 통한 동적인 UI </b>
+ - <b> Modern Collection View 적용을 통한 동적인 UI </b>  
+   [(Modern Collection View를 정리한 블로그 글)](https://dev-kang.tistory.com/39)  
   <img src="./img/Movie.gif" width="30%"/>  
 
 ## Library

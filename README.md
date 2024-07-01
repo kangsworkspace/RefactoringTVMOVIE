@@ -27,7 +27,7 @@
 - **변경 이유**
   - `RxAlamofire`의 마지막 Release가 2021년으로 현재 버젼의 `RxSwift`에 대응하지 않습니다.  
   - 개인적으로 `Alamofire`보다 `Moya`가 추상화에서 강점이 있다고 생각합니다.  
-    (내부적으로 `URLSession`으로 돌아가는 `Alamofire`를 사용하는 이유가 추상화라고 생각합니다.)
+    (내부적으로 `URLSession`으로 돌아가는 `Alamofire`를 사용하는 이유가 추상화라고 생각합니다.)  
 
 - **`Extension`을 활용하여 `Moya`의 `TargetType` 항목 분리**
   - `Moya`의 `TargetType`을 입력할 때 `Extension`을 활용하여 파일을 분리하였습니다.
@@ -87,7 +87,14 @@ private var currentTVList: [TV] = []
 private let tvListRelay = BehaviorRelay<[TV]>(value: [])
 ```
 
-### 에러 핸들링(서버 문제)
+#### 그 외 기타
+- 접근만 필요한 변수 `private(set)` 처리
+- UI에 적용되는 바인딩 `.bind` -> `.drive` 변경
+- 메인 뷰의 CollectionView 하위 뷰로 분리
+- `View`에서 데이터를 화면에 맞게 변환하는 로직 제거  
+   (`View`는 최대한 받아온 데이터만 사용하도록)  
+
+## 에러 핸들링(서버 문제)
 <img src="./img/Error1.png" width="80%"/>  
 <img src="./img/Error2.png" width="80%"/>  
 발생한 에러는 iD에 중복값이 있어 나타난 문제로,  
@@ -99,19 +106,19 @@ private let tvListRelay = BehaviorRelay<[TV]>(value: [])
 <br>
 서버가 리턴하는 데이터의 문제인 것으로 결론내렸습니다.  
 
-### 작업 Flow - TBD(Trunk Based Develop)
+## 작업 Flow - TBD(Trunk Based Develop)
   - 단일한 브랜치(Main or Trunk)에 수시로 병합(merge)
   - 브랜치의 수명을 가능한 짧게 가져감
   - [TBD에 대한 내용을 정리한 블로그](https://dev-kang.tistory.com/36)
 
-### 개발 및 테스트 환경 버전
+## 개발 및 테스트 환경 버전
   - Xcode 15.3
   - iOS 16+
   - iPhone15 시뮬레이터
   - Portrait Only
   - LightMode Only
 
-### 프로젝트 실행 방법
+## 프로젝트 실행 방법
 ```
 프로젝트 빌드 시 Secrets.configs 파일이 필요합니다.
 본 프로젝트 실행을 위해 파일이 필요할 시 spdlqjrkdrjs@naver.com으로 요청해주세요.
@@ -124,7 +131,7 @@ git clone https://github.com/kangsworkspace/RefactoringTVMOVIE
 - Simulator 기기를 iPhone15로 설정하고 빌드합니다.
 <br>
 
-### 구현 내용
+## 구현 내용
  - <b> API를 통해 데이터 가져오기 </b>
  - <b> 페이징 처리 </b>
  - <b> 검색 </b>

@@ -7,7 +7,11 @@
 
 ## 리팩토링
 ### 파일 구조가 명확해지도록 그룹화   
-(비교사진 전)(비교사진 후)  
+**그룹화 전**  
+<img src="./img/Folder1.png" width="30%"/>  
+**그룹화 후**  
+<img src="./img/Folder2.png" width="30%"/>  
+
 디자인 패턴에 맞게 파일들을 다음과 같이 그룹화하였습니다.  
 - **Models**: 네트워킹을 포함한 데이터 로직  
   - Entities: 네트워크에서 받아올 데이터의 타입을 정의  
@@ -27,8 +31,11 @@
 
 - **`Extension`을 활용하여 `Moya`의 `TargetType` 항목 분리**
   - `Moya`의 `TargetType`을 입력할 때 `Extension`을 활용하여 파일을 분리하였습니다.
-  - 파일이 분리되어 유지,보수 측면에서 강점이 있을 것으로 기대됩니다.  
-(분리사진1)(분리사진2)
+  - 파일이 분리되어 유지,보수 측면에서 강점이 있을 것으로 기대됩니다.
+**Extension 적용**
+
+|<img src="./img/Folder3.png" width="100%"/> | <img src="./img/Folder4.png" width="60%"/> |
+|--|--|
 
 #### 기존코드(RxAlamofire)
 ```swift
@@ -81,7 +88,8 @@ private let tvListRelay = BehaviorRelay<[TV]>(value: [])
 ```
 
 ### 에러 핸들링(서버 문제)
-(에러사진 1, 에러사진 2)
+<img src="./img/Error1.png" width="80%"/>  
+<img src="./img/Error2.png" width="80%"/>  
 발생한 에러는 iD에 중복값이 있어 나타난 문제로,  
 에러 로그를 보고 중복값을 없애 바로 해결하였습니다.  
 <br>
@@ -118,12 +126,12 @@ git clone https://github.com/kangsworkspace/RefactoringTVMOVIE
  - <b> API를 통해 데이터 가져오기 </b>
  - <b> 페이징 처리 </b>
  - <b> 검색 </b>
-|<img src="./img/TextField.gif" width="60%"/> | <img src="./img/ClearButton.gif" width="60%"/> |<img src="./img/TextField.gif" width="60%"/> |
+ 
+| <img src="./img/TV.gif" width="80%"/> | <img src="./img/Review.gif" width="80%"/> | <img src="./img/Search.gif" width="80%"/> |
 |--|--|--|
 
  - <b> Modern Collection View 적용을 통한 동적인 UI </b>
-  <img src="./img/Login1.jpg" width="30%"/>  
-  <img src="./img/Login2.gif" width="30%"/>  
+  <img src="./img/Movie.gif" width="30%"/>  
 
 ## Library
 - [RxSwift](https://github.com/ReactiveX/RxSwift)

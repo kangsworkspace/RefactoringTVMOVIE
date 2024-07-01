@@ -36,6 +36,15 @@ final class NetworkProvider {
             return MovieResult(upcoming: upcoming, popular: popular, nowPlaying: nowPlaying)
         }
     }
+    
+    func fetchReview(reviewRequest: ReviewRequest) -> Single<ReviewListModel> {
+        return provider.rx.request(.getReviewList(reviewRequest))
+            .map { response in
+                print(response)
+                let decoder = JSONDecoder()
+                return try decoder.decode(ReviewListModel.self, from: response.data)
+            }
+    }
 
     private func fetchMovieUpcoming() -> Single<MovieListModel> {
         return provider.rx.request(.getMovieList(MovieRequest(movieReqeustType: .upcoming)))

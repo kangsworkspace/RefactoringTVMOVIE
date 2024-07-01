@@ -7,23 +7,18 @@
 
 import Foundation
 
-enum Section: Hashable {
+enum MainSection: Hashable {
     case double
     case banner
     case horizontal(String)
     case vertical(String)
 }
 
-enum Item: Hashable {
-    case normal(TV)
+enum MainItem: Hashable {
+    case normalTV(TV)
     case normalMovie(Movie)
     case bigImage(Movie)
     case list(Movie)
-}
-
-enum LanguageType: String, Decodable {
-    case korean = "ko"
-    case english = "en"
 }
 
 enum MovieRequestType: Decodable {
@@ -35,4 +30,19 @@ enum MovieRequestType: Decodable {
 enum ContentType: String, Decodable {
     case tv
     case movie
+}
+
+enum ReviewSection {
+    case list
+}
+
+enum ReviewItem: Hashable {
+    case header(ReviewHeader)
+    case content(String)
+}
+
+struct ReviewHeader: Hashable {
+    let id: String
+    let name: String
+    let url: String
 }

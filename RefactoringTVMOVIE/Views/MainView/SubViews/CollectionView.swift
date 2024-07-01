@@ -12,7 +12,7 @@ import Then
 
 final class CollectionView: UIView {
     // MARK: - Fields
-    var dataSource: UICollectionViewDiffableDataSource<Section,Item>?
+    var dataSource: UICollectionViewDiffableDataSource<MainSection,MainItem>?
     
     // MARK: - Layouts
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
@@ -40,9 +40,9 @@ final class CollectionView: UIView {
     }
     
     private func setDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section,Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource<MainSection,MainItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             switch item {
-            case .normal(let tvData):
+            case .normalTV(let tvData):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NormalCollectionViewCell.id, for: indexPath) as? NormalCollectionViewCell
                 cell?.configure(title: tvData.name, review: tvData.vote, description: tvData.overview, imageURL: tvData.posterURL)
                 return cell
@@ -159,7 +159,7 @@ final class CollectionView: UIView {
         return section
     }
     
-    public func applySnapShot(snapShot: NSDiffableDataSourceSnapshot<Section,Item>) {
+    public func applySnapShot(snapShot: NSDiffableDataSourceSnapshot<MainSection,MainItem>) {
         self.dataSource?.apply(snapShot)
     }
     

@@ -20,7 +20,7 @@ extension Network {
         case .getTVList(let request):
             var parameters: [String: Any] = [
                 "api_key": apiKey,
-                "language": request.language.rawValue,
+                "language": "ko",
             ]
             
             if request.page != nil {
@@ -33,12 +33,20 @@ extension Network {
             
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
             
-        case .getMovieList(let request):
+        case .getMovieList:
             let parameters: [String: Any] = [
                 "api_key": apiKey,
-                "language": request.language.rawValue,
+                "language": "ko",
             ]
 
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+            
+        case .getReviewList:
+            let parameters: [String: Any] = [
+                "api_key": apiKey,
+                "language": "en",
+            ]
+            
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
     }

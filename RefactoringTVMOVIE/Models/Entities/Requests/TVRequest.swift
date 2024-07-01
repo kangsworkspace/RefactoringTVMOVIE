@@ -9,12 +9,10 @@ import Foundation
 
 struct TVRequest: Decodable {
     var page: Int?
-    var language: LanguageType
     var query: String?
     
-    init(page: Int? = nil, language: LanguageType = LanguageType.korean, query: String? = nil) {
+    init(page: Int? = nil, query: String? = nil) {
         self.page = page
-        self.language = language
         self.query = query
     }
 }

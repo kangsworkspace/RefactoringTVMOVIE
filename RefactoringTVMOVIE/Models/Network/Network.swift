@@ -12,6 +12,7 @@ import Moya
 enum Network {
     case getTVList(TVRequest)
     case getMovieList(MovieRequest)
+    case getReviewList(ReviewRequest)
 }
 
 extension Network: TargetType {

@@ -90,9 +90,9 @@ final class MainViewController: UIViewController {
         output.tvList
             .asDriver(onErrorJustReturn: [TV]())
             .drive(onNext: { [weak self] tvList in
-                var snapshot = NSDiffableDataSourceSnapshot<Section,Item>()
-                let items = tvList.map { Item.normal( $0 )}
-                let section = Section.double
+                var snapshot = NSDiffableDataSourceSnapshot<MainSection,MainItem>()
+                let items = tvList.map { MainItem.normalTV( $0 )}
+                let section = MainSection.double
                 snapshot.appendSections([section])
                 snapshot.appendItems(items, toSection: section)
                 self?.collectionView.applySnapShot(snapShot: snapshot)
@@ -101,20 +101,20 @@ final class MainViewController: UIViewController {
         output.movieResult
             .asDriver(onErrorJustReturn: MovieResult(upcoming: MovieListModel(page: 1, results: [Movie]()), popular: MovieListModel(page: 1, results: [Movie]()), nowPlaying: MovieListModel(page: 1, results: [Movie]())))
             .drive(onNext: { [weak self] movieResult in
-                var snapshot = NSDiffableDataSourceSnapshot<Section,Item>()
-                let bigImageList = movieResult.nowPlaying.results.map { Item.bigImage($0)}
+                var snapshot = NSDiffableDataSourceSnapshot<MainSection,MainItem>()
+                let bigImageList = movieResult.nowPlaying.results.map { MainItem.bigImage($0)}
                 
-                let bannerSection = Section.banner
+                let bannerSection = MainSection.banner
                 snapshot.appendSections([bannerSection])
                 snapshot.appendItems(bigImageList, toSection: bannerSection)
                 
-                let horizontalSection = Section.horizontal("Popular Movies")
-                let normalList = movieResult.popular.results.map { Item.normalMovie( $0 )}
+                let horizontalSection = MainSection.horizontal("Popular Movies")
+                let normalList = movieResult.popular.results.map { MainItem.normalMovie( $0 )}
                 snapshot.appendSections([horizontalSection])
                 snapshot.appendItems(normalList, toSection: horizontalSection)
                 
-                let verticalSection = Section.vertical("Upcoming Movies")
-                let itemList = movieResult.upcoming.results.map { Item.list($0)}
+                let verticalSection = MainSection.vertical("Upcoming Movies")
+                let itemList = movieResult.upcoming.results.map { MainItem.list($0)}
                 snapshot.appendSections([verticalSection])
                 snapshot.appendItems(itemList, toSection: verticalSection)
                 
@@ -147,6 +147,20 @@ final class MainViewController: UIViewController {
         buttonView.movieButton.rx.tap.bind { [weak self] in
             self?.textField.isHidden = true
             self?.movieTrigger.onNext(Void())
+        }.disposed(by: disposeBag)
+        
+        collectionView.collectionView.rx.itemSelected.bind {[weak self] indexPath in
+            let item = self?.collectionView.dataSource?.itemIdentifier(for: indexPath)
+            
+            switch item {
+            case .normalTV(let tvData):
+                let navigationController = UINavigationController()
+                let viewController = ReviewViewController(id: tvData.id)
+                navigationController.viewControllers = [viewController]
+                self?.present(navigationController, animated: true)
+            default:
+                print("default")
+            }
         }.disposed(by: disposeBag)
     }
 }

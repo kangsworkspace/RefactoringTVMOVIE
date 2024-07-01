@@ -25,6 +25,8 @@ extension Network {
         case .upcoming:
             return "/movie/upcoming"
         }
+    case .getReviewList(let request):
+        return "/tv/\(request.id)/reviews"
     }
   }
 }

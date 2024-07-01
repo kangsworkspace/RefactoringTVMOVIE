@@ -8,11 +8,9 @@
 import Foundation
 
 struct MovieRequest: Decodable {
-    var language: LanguageType
     var movieReqeustType: MovieRequestType
     
-    init(language: LanguageType = LanguageType.korean, movieReqeustType: MovieRequestType) {
-        self.language = language
+    init(movieReqeustType: MovieRequestType) {
         self.movieReqeustType = movieReqeustType
     }
 }

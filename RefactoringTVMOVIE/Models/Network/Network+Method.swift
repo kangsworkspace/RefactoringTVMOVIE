@@ -15,6 +15,8 @@ extension Network {
             return .get
         case .getMovieList:
             return .get
+        case .getReviewList:
+            return .get
         }
     }
 }

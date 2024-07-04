@@ -95,7 +95,7 @@ private let tvListRelay = BehaviorRelay<[TV]>(value: [])
 - `View`에서 데이터를 화면에 맞게 변환하는 로직 제거  
    (`View`는 최대한 받아온 데이터만 사용하도록)  
 
-## 에러 핸들링(서버 문제)
+## 트러블 슈팅(서버 문제)
 <img src="./img/Error1.png" width="80%"/>  
 <img src="./img/Error2.png" width="80%"/>  
 발생한 에러는 iD에 중복값이 있어 나타난 문제로,  
